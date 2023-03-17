@@ -1,7 +1,7 @@
 class List {
   
-  constructor () {
-    this.arr = [];
+  constructor (arr) {
+    this.arr = [...arr];
   }
 
   length() {
@@ -45,7 +45,7 @@ class List {
   }
 
   clone() {
-    return [...this.arr];
+    return new List(this.arr);
   }
 
   reverse() {

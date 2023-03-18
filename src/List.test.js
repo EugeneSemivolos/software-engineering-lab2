@@ -1,6 +1,6 @@
-const List = require("./List");
+const List = require("./LinkedList");
 
-describe('Testing list based on an array', () => {
+describe('Testing linked list', () => {
   test('Getting length of list', () => {
     const list = new List();
     list.append('n');
@@ -10,14 +10,21 @@ describe('Testing list based on an array', () => {
     expect(list.length()).toBe(4);
   });
 
-  test('Adding an element', () => {
+  test('Adding elements', () => {
     const list = new List();
     list.append('f');
+
+    expect(list.head).not.toBeNull();
+    expect(list.head.next).toBe(list.head);
+    expect(list.head.value).toBe('f');
+
     list.append('o');
     list.append('x');
 
-    expect(list.get(0)).toBe('f');
-    expect(list.get(2)).toBe('x');
+    expect(list.head.next).not.toBe(list.head);
+    expect(list.head.next.value).toBe('o');
+    expect(list.head.next.next.value).toBe('x');
+    expect(list.head.next.next.next).toBe(list.head);
   });
 
   test('Inserting an element', () => { 
@@ -78,17 +85,15 @@ describe('Testing list based on an array', () => {
 
   test('Cloning the list', () => {
     const list = new List();
-    list.append('f');
-    list.append('o');
-    list.append('o');
-    list.append('d');
+    list.append('A');
+    list.append('B');
 
-    const clonedList = list.clone();
+    const clone = list.clone();
 
-    expect(list).not.toBe(clonedList);
-    clonedList.arr.forEach((value, index) => {
-      expect(value).toBe(list.arr[index]);
-    })
+    expect(clone.head).not.toBe(list.head);
+    expect(clone.head?.next).not.toBe(list.head?.next);
+    expect(clone.get(0)).toBe(list.get(0));
+    expect(clone.get(1)).toBe(list.get(1));
   });
 
   test('Reversing the list', () => {

@@ -1,6 +1,6 @@
 class List {
   
-  constructor (arr) {
+  constructor (arr = []) {
     this.arr = [...arr];
   }
 
@@ -68,3 +68,5 @@ class List {
     this.arr = [...this.arr, ...elements];
   }
 }
+
+module.exports = List;

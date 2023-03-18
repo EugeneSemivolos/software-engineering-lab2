@@ -1,14 +1,10 @@
-import { List } from './List';
+const List = require("./List");
 
-describe('Testing first implementation of List', () => {
+test('Check adding an element', () => {
+  const list = new List();
 
-  test('Check adding an element', () => {
-    const list = new List();
+  list.append('A');
+  const result = list.get(0);
 
-    list.append('A');
-    const result = list.get(0);
-
-    expect(result).toBe('A');
-  });
-
+  expect(result).toBe('A');
 });

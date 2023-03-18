@@ -65,7 +65,7 @@ class List {
   }
 
   extend(elements) {
-    this.arr = [...this.arr, ...elements];
+    this.arr = [...this.arr, ...elements.arr];
   }
 }
 

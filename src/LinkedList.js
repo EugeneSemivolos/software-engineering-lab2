@@ -6,7 +6,6 @@ class Node {
 }
 
 class LinkedList {
-
   constructor () {
     this.head = null;
   }
@@ -42,12 +41,20 @@ class LinkedList {
     }
     if (index === this.length()) {
       this.append(element);
-    } else {
-      const previous = this.getNode(index - 1);
-      const next = previous.next;
-      previous.next = new Node(element);
-      previous.next.next = next;
+      return;
     }
+    if (index === 0) {
+      const previous = this.getNode(this.length() - 1);
+      const next = this.head;
+      this.head = new Node(element);
+      this.head.next = next;
+      previous.next = this.head;
+      return;
+    }
+    const previous = this.getNode(index - 1);
+    const next = previous.next;
+    previous.next = new Node(element);
+    previous.next.next = next;
   }
 
   delete(index) {
@@ -55,19 +62,24 @@ class LinkedList {
       throw new Error('Invalid number');
     }
 
+    let value;
+
     if (this.length() === 1) {
+      value = this.head.value;
       this.head = null;
-      return this.head.value;
-    }
-    if (index === 0) {
+    } else if (index === 0) {
       const last = this.getNode(this.length() - 1);
-      const head = this.head = head.next;
+      const head = this.head;
+      value = head.value;
+      this.head = head.next;
       last.next = this.head;
-      return head.value;
+    } else {
+      const previous = this.getNode(index - 1);
+      value = previous.next.value;
+      previous.next = previous.next.next;
     }
-    const previous = this.getNode(index - 1);
-    previous.next = previous.next.next;
-    return previous.next.value;
+
+    return value;
   }
 
   deleteAll(element) {
@@ -143,7 +155,6 @@ class LinkedList {
 
     return -1;
   }
-
   clear() {
     this.head = null;
   }
@@ -155,9 +166,9 @@ class LinkedList {
     if (!this.head) {
       this.head = clone.head;
     } else {
-      const last = this.get(this.length() - 1);
+      const last = this.getNode(this.length() - 1);
       last.next = clone.head;
-      clone.get(clone.length() - 1).next = this.head;
+      clone.getNode(clone.length() - 1).next = this.head;
     }
   }
 }

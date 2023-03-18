@@ -53,7 +53,7 @@ describe('Testing linked list', () => {
     list.append('l');
     list.append('e');
 
-    expect(list.delete(2)).toBe('l');
+    expect(list.delete(2)).toBe('d');
     expect(list.get(3)).toBe('e');
   });
 

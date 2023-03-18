@@ -1,7 +1,7 @@
-const List = require("./List");
+const LinkedList = require("./LinkedList");
 
 function main() {
-  const list = new List();
+  const list = new LinkedList();
 
   const phrase = 'Hello World!';
   console.log('Start list: \t\t', phrase);
